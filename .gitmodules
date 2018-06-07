@@ -1,3 +1,0 @@
-[submodule "iotsdk"]
-	path = aws-iot-device-sdk-python
-	url = https://github.com/aws/aws-iot-device-sdk-python.git
