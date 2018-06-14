@@ -1,12 +1,22 @@
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient
 import json
-import os
+import atexit
+import time
 
 
 def echoCallback(payload, responseStatus, token):
+    global shadowDevice
+    print('--- Update Received ---')
+    print("Status: " + responseStatus)
     p = json.loads(payload)
-    print(p)
-
+    print(json.dumps(p, indent=4, sort_keys=True))
+    print('--- End of Update ---')
+    p["state"]["sensor_data"] = {
+        "temperature": 16,
+        "humidity": 17
+    }
+    reported = '{"state":{"reported":' + json.dumps(p["state"]) + '}}'
+    shadowDevice.shadowUpdate( reported, None, 5)
 
 # クライアントセットアップ
 shadowClient = AWSIoTMQTTShadowClient("")
@@ -20,8 +30,16 @@ shadowClient.connect()
 
 shadowDevice = shadowClient.createShadowHandlerWithName("Air-RME-test", True)
 
-shadowDevice.shadowGet(echoCallback, 5)
 shadowDevice.shadowRegisterDeltaCallback(echoCallback)
-shadowDevice.shadowUnregisterDeltaCallback()
 
-shadowClient.disconnect()
+
+def exit_handler():
+    global shadowDevice
+    shadowDevice.shadowUnregisterDeltaCallback()
+    shadowClient.disconnect()
+
+
+atexit.register(exit_handler)
+
+while True:
+    time.sleep(1)
