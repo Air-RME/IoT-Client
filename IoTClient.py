@@ -38,6 +38,13 @@ class IoTClient:
         connected = self._shadowC.connect() and self._mqttC.connect()
         self._redis = redis.Redis(host='localhost', port=6379)
 
+        try:
+            self._redis.get(None)  # getting None returns None or throws an exception
+        except (redis.exceptions.ConnectionError,
+                redis.exceptions.BusyLoadingError):
+            print("Failed to connect to Redis server")
+            return False
+
         if connected:
             self._shadowD = self._shadowC.createShadowHandlerWithName("Air-RME-test", True)
 
