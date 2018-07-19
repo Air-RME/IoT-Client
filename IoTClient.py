@@ -35,7 +35,7 @@ class IoTClient:
         if self._shadowC is not None:
             self._shadowC.disconnect()
         if self._mqttC is not None:
-        self._mqttC.disconnect()
+            self._mqttC.disconnect()
 
     def connect(self):
         connected = self._shadowC.connect() and self._mqttC.connect()
