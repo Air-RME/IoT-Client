@@ -4,6 +4,7 @@ from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
 import redis
 import sys
 from lib import sensor_data
+import threading
 
 
 class IoTClient:
@@ -29,6 +30,10 @@ class IoTClient:
         self._mqttC.configureDrainingFrequency(2)  # Draining: 2 Hz
         self._mqttC.configureConnectDisconnectTimeout(10)  # 10 sec
         self._mqttC.configureMQTTOperationTimeout(5)  # 5 sec
+
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True  # Daemonize thread
+        thread.start()  # Start the execution
 
     def __del__(self):
         try:
@@ -79,32 +84,34 @@ class IoTClient:
     def publish(self, topic, message):
         self._mqttC.publish(topic, json.dumps(message), 0)
 
+    def run(self):
+        print("Trying to connect to MQTT broker...")
 
-client = IoTClient()
+        if client.connect():
+            print("Connected")
 
-print("Trying to connect to MQTT broker...")
+            lastTemp = 0
+            lastHum = 0
 
-if client.connect():
-    print("Connected")
+            while True:
+                humidity, temperature = sensor_data.get_temperature_info()
 
-    lastTemp = 0
-    lastHum = 0
+                if lastTemp != temperature or lastHum != humidity:
+                    data = {
+                        "temp": temperature,
+                        "hum": humidity
+                    }
 
-    while True:
-        humidity, temperature = sensor_data.get_temperature_info()
+                    client.publish("/Air-RME-test/sensor", data)
+                    lastTemp = temperature
+                    lastHum = humidity
 
-        if lastTemp != temperature or lastHum != humidity:
-            data = {
-                "temp": temperature,
-                "hum": humidity
-            }
+                time.sleep(1)
+        else:
+            print("Connection failed.")
 
-            client.publish("/Air-RME-test/sensor", data)
-            lastTemp = temperature
-            lastHum = humidity
+        return
 
-        time.sleep(1)
-else:
-    print("Connection failed.")
 
-sys.exit(1)
+if __name__ == "__main__":
+    client = IoTClient()
