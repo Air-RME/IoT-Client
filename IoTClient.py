@@ -72,6 +72,8 @@ class IoTClient:
         print(json.dumps(self._state["state"], indent=4, sort_keys=True))
         print('--- End of Update ---')
         reported = '{"state":{"reported":' + json.dumps(p["state"]) + '}}'
+        self._redis.rpush("order", self._state["state"]["desired"]);
+        print(self._redis.lpop("order").decode('utf-8'))
         self._shadowD.shadowUpdate(reported, None, 5)
 
     def publish(self, topic, message):
