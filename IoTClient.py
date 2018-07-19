@@ -3,6 +3,7 @@ import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
 from lib import sensor_data
 
+
 class IoTClient:
 
     def __init__(self):
@@ -69,13 +70,20 @@ if client.connect():
 else:
     print("Connection failed.")
 
+lastTemp = 0
+lastHum = 0
+
 while True:
     humidity, temperature = sensor_data.get_temperature_info()
 
-    data = {
-        "temp": temperature,
-        "hum": humidity
-    }
+    if lastTemp != temperature or lastHum != humidity:
+        data = {
+            "temp": temperature,
+            "hum": humidity
+        }
 
-    client.publish("/Air-RME-test/sensor", data)
-    time.sleep(2)
+        client.publish("/Air-RME-test/sensor", data)
+        lastTemp = temperature
+        lastHum = humidity
+
+    time.sleep(1)
