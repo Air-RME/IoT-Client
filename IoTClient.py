@@ -2,6 +2,7 @@ import json
 import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
 import redis
+import sys
 from lib import sensor_data
 
 
@@ -80,6 +81,8 @@ if client.connect():
     print("Connected")
 else:
     print("Connection failed.")
+    sys.exit(1)
+
 
 lastTemp = 0
 lastHum = 0
