@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ca5036a-c3e7-4bfe-a1c9-c11b279a002e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/setup.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IoTClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/IoTClient.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,32 +17,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ShadowEcho.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/samples/ShadowEcho.py">
+      <file leaf-file-name="sensor_data.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/sensor_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-              <folding>
-                <element signature="e#0#58#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="85">
+              <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setup.sh" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/setup.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IoTClient.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="IoTClient.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/IoTClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="59" column="23" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
+            <state relative-caret-position="357">
+              <caret line="78" column="4" selection-start-line="78" selection-start-column="4" selection-end-line="78" selection-end-column="4" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -55,8 +43,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Setup Script" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -86,9 +74,10 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Client.py" />
         <option value="$PROJECT_DIR$/samples/ShadowEcho.py" />
-        <option value="$PROJECT_DIR$/IoTClient.py" />
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/setup.sh" />
+        <option value="$PROJECT_DIR$/lib/get_sensor_data.py" />
+        <option value="$PROJECT_DIR$/IoTClient.py" />
       </list>
     </option>
   </component>
@@ -120,6 +109,11 @@
             <path>
               <item name="IoT-Client" type="b2602c69:ProjectViewProjectNode" />
               <item name="IoT-Client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IoT-Client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IoT-Client" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -448,16 +442,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/samples/ShadowEcho.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/AWSIoTPythonSDK/MQTTLib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -465,24 +449,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IoTClient.py">
+    <entry file="file://$PROJECT_DIR$/setup.py" />
+    <entry file="file://$PROJECT_DIR$/setup.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="59" column="23" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
+        <state relative-caret-position="272">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/samples/ShadowEcho.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17">
+          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#58#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/sensor_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py" />
-    <entry file="file://$PROJECT_DIR$/setup.sh">
+    <entry file="file://$PROJECT_DIR$/IoTClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        <state relative-caret-position="357">
+          <caret line="78" column="4" selection-start-line="78" selection-start-column="4" selection-end-line="78" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
