@@ -8,7 +8,7 @@ setup(
     license='',
     author='Kristoffer Ahlen Bergman',
     author_email='kba_93@live.se',
-    description='Air RMEプロジェットのIoTクライアント',
+    description='Air RME IoT Project',
     install_requires=[
         'AWSIoTPythonSDK==1.4.0',
         'Adafruit_Python_DHT==1.3.2'
