@@ -13,8 +13,8 @@ class IoTClient:
         self._shadowC = AWSIoTMQTTShadowClient("shadow")
         self._shadowC.configureEndpoint("a1g1flllk3y7ps.iot.ap-northeast-1.amazonaws.com", 8883)
         self._shadowC.configureCredentials("credentials/aws/aws-root.pem",
-                                           "credentials/device/4bb00f45b1-private.pem.key",
-                                           "credentials/device/4bb00f45b1-certificate.pem.crt")
+                                           "credentials/device/private.pem.key",
+                                           "credentials/device/certificate.pem.crt")
         self._shadowC.configureConnectDisconnectTimeout(10)
         self._shadowC.configureMQTTOperationTimeout(5)
 
