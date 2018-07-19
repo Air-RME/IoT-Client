@@ -1,10 +1,13 @@
 import json
 import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
+import redis
 from lib import sensor_data
 
 
 class IoTClient:
+
+    _redis = None
 
     def __init__(self):
         self._shadowC = AWSIoTMQTTShadowClient("shadow")
@@ -33,6 +36,7 @@ class IoTClient:
 
     def connect(self):
         connected = self._shadowC.connect() and self._mqttC.connect()
+        self._redis = redis.Redis(host='localhost', port=6379)
 
         if connected:
             self._shadowD = self._shadowC.createShadowHandlerWithName("Air-RME-test", True)

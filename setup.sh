@@ -1,3 +1,5 @@
+sudo pip3 install redis
+
 git clone https://github.com/aws/aws-iot-device-sdk-python.git
 cd aws-iot-device-sdk-python
 
