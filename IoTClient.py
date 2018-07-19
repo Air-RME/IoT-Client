@@ -31,10 +31,11 @@ class IoTClient:
         self._mqttC.configureMQTTOperationTimeout(5)  # 5 sec
 
     def __del__(self):
-        if self._shadowC is not None:
+        try:
             self._shadowC.disconnect()
-        if self._mqttC is not None:
             self._mqttC.disconnect()
+        except Exception:
+            pass
 
     def connect(self):
         self._redis = redis.Redis(host='localhost', port=6379)
@@ -59,6 +60,7 @@ class IoTClient:
     def _setStateCallback(self, payload, responseStatus, token):
         self._state = json.loads(payload)
         reported = '{"state":{"reported":' + json.dumps(self._state["state"]["desired"]) + '}}'
+        self._redis.rpush("order", self._state["state"]["desired"]);
         self._shadowD.shadowUpdate(reported, None, 5)
 
     def _echoCallback(self, payload, responseStatus, token):
