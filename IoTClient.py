@@ -22,8 +22,8 @@ class IoTClient:
         self._mqttC = AWSIoTMQTTClient("regular")
         self._mqttC.configureEndpoint("a1g1flllk3y7ps.iot.ap-northeast-1.amazonaws.com", 8883)
         self._mqttC.configureCredentials("credentials/aws/aws-root.pem",
-                                         "credentials/device/4bb00f45b1-private.pem.key",
-                                         "credentials/device/4bb00f45b1-certificate.pem.crt")
+                                         "credentials/device/private.pem.key",
+                                         "credentials/device/certificate.pem.crt")
 
         self._mqttC.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
         self._mqttC.configureDrainingFrequency(2)  # Draining: 2 Hz
