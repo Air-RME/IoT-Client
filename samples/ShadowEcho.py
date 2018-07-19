@@ -11,10 +11,6 @@ def echoCallback(payload, responseStatus, token):
     p = json.loads(payload)
     print(json.dumps(p, indent=4, sort_keys=True))
     print('--- End of Update ---')
-    p["state"]["sensor_data"] = {
-        "temperature": 16,
-        "humidity": 17
-    }
     reported = '{"state":{"reported":' + json.dumps(p["state"]) + '}}'
     shadowDevice.shadowUpdate( reported, None, 5)
 
