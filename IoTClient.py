@@ -80,24 +80,24 @@ print("Trying to connect to MQTT broker...")
 
 if client.connect():
     print("Connected")
+
+    lastTemp = 0
+    lastHum = 0
+
+    while True:
+        humidity, temperature = sensor_data.get_temperature_info()
+
+        if lastTemp != temperature or lastHum != humidity:
+            data = {
+                "temp": temperature,
+                "hum": humidity
+            }
+
+            client.publish("/Air-RME-test/sensor", data)
+            lastTemp = temperature
+            lastHum = humidity
+
+        time.sleep(1)
 else:
     print("Connection failed.")
     exit(1)
-
-lastTemp = 0
-lastHum = 0
-
-while True:
-    humidity, temperature = sensor_data.get_temperature_info()
-
-    if lastTemp != temperature or lastHum != humidity:
-        data = {
-            "temp": temperature,
-            "hum": humidity
-        }
-
-        client.publish("/Air-RME-test/sensor", data)
-        lastTemp = temperature
-        lastHum = humidity
-
-    time.sleep(1)
