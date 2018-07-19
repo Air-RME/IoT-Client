@@ -2,7 +2,6 @@ import json
 import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
 import redis
-import sys
 from lib import sensor_data
 import threading
 
@@ -115,3 +114,6 @@ class IoTClient:
 
 if __name__ == "__main__":
     client = IoTClient()
+
+while True:
+    time.sleep(1)
