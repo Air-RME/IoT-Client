@@ -3,7 +3,6 @@ import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
 import redis
 from lib import sensor_data
-import threading
 
 
 class IoTClient:
@@ -29,10 +28,6 @@ class IoTClient:
         self._mqttC.configureDrainingFrequency(2)  # Draining: 2 Hz
         self._mqttC.configureConnectDisconnectTimeout(10)  # 10 sec
         self._mqttC.configureMQTTOperationTimeout(5)  # 5 sec
-
-        thread = threading.Thread(target=self.run, args=())
-        thread.daemon = True  # Daemonize thread
-        thread.start()  # Start the execution
 
     def __del__(self):
         try:
