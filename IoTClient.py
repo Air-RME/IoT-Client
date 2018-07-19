@@ -1,7 +1,7 @@
 import json
 import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
-from .lib import sensor_data
+from lib import sensor_data
 
 class IoTClient:
 
@@ -76,6 +76,6 @@ while True:
         "temp": temperature,
         "hum": humidity
     }
-    
+
     client.publish("/Air-RME-test/sensor", data)
     time.sleep(2)
