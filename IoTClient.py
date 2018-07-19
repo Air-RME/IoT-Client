@@ -2,7 +2,7 @@ import json
 import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
 import redis
-from lib import sensor_data
+from .lib import sensor_data
 import threading
 
 
