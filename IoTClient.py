@@ -32,7 +32,9 @@ class IoTClient:
         self._mqttC.configureMQTTOperationTimeout(5)  # 5 sec
 
     def __del__(self):
-        self._shadowC.disconnect()
+        if self._shadowC is not None:
+            self._shadowC.disconnect()
+        if self._mqttC is not None:
         self._mqttC.disconnect()
 
     def connect(self):
