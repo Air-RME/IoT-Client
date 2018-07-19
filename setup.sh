@@ -11,5 +11,7 @@ cd Adafruit_Python_DHT
 sudo python setup.py install
 sudo python3 setup.py install
 
+cd ..
+
 rm -rf aws-iot-device-sdk-python
 rm -rf Adafruit_Python_DHT
