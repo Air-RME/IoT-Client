@@ -2,11 +2,11 @@ import json
 import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
 import redis
+import sys
 from lib import sensor_data
 
 
 class IoTClient:
-
     _redis = None
 
     def __init__(self):
@@ -100,4 +100,5 @@ if client.connect():
         time.sleep(1)
 else:
     print("Connection failed.")
-    exit(1)
+
+sys.exit(1)
