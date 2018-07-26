@@ -84,7 +84,7 @@ class IoTClient:
     def run(self):
         print("Trying to connect to MQTT broker...")
 
-        if client.connect():
+        if self.connect():
             print("Connected")
 
             lastTemp = 0
@@ -99,7 +99,7 @@ class IoTClient:
                         "hum": humidity
                     }
 
-                    client.publish("/Air-RME-test/sensor", data)
+                    self.publish("/Air-RME-test/sensor", data)
                     lastTemp = temperature
                     lastHum = humidity
 
@@ -113,5 +113,5 @@ class IoTClient:
 if __name__ == "__main__":
     client = IoTClient()
 
-while True:
-    time.sleep(1)
+    while True:
+        time.sleep(1)
