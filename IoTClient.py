@@ -2,6 +2,7 @@ import json
 import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
 import redis
+import os
 from lib import sensor_data
 
 
@@ -9,20 +10,22 @@ class IoTClient:
     _redis = None
 
     def __init__(self):
+        path = os.path.abspath(os.path.dirname(__file__))
+
         self._shadowC = AWSIoTMQTTShadowClient("shadow")
         self._shadowC.configureEndpoint("a1g1flllk3y7ps.iot.ap-northeast-1.amazonaws.com", 8883)
-        self._shadowC.configureCredentials("credentials/aws/aws-root.pem",
-                                           "credentials/device/private.pem.key",
-                                           "credentials/device/certificate.pem.crt")
+        self._shadowC.configureCredentials(os.path.join(path, "credentials/aws/aws-root.pem"),
+                                           os.path.join(path, "credentials/device/private.pem.key"),
+                                           os.path.join(path, "./credentials/device/certificate.pem.crt"))
         self._shadowC.configureConnectDisconnectTimeout(10)
         self._shadowC.configureMQTTOperationTimeout(5)
 
         # For certificate based connection
         self._mqttC = AWSIoTMQTTClient("regular")
         self._mqttC.configureEndpoint("a1g1flllk3y7ps.iot.ap-northeast-1.amazonaws.com", 8883)
-        self._mqttC.configureCredentials("credentials/aws/aws-root.pem",
-                                         "credentials/device/private.pem.key",
-                                         "credentials/device/certificate.pem.crt")
+        self._mqttC.configureCredentials(os.path.join(path, "credentials/aws/aws-root.pem"),
+                                         os.path.join(path, "credentials/device/private.pem.key"),
+                                         os.path.join(path, "./credentials/device/certificate.pem.crt"))
 
         self._mqttC.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
         self._mqttC.configureDrainingFrequency(2)  # Draining: 2 Hz
