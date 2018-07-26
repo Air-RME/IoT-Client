@@ -3,7 +3,7 @@ import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
 import redis
 import os
-from lib import sensor_data
+from IoTClient.lib import sensor_data
 
 
 class IoTClient:
