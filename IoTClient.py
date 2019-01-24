@@ -1,7 +1,6 @@
 import json
 import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
-from jsonmerge import merge
 import redis
 import os
 from IoTClient.lib import sensor_data
