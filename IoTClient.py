@@ -69,7 +69,7 @@ class IoTClient:
     def _echoCallback(self, payload, responseStatus, token):
         print('--- Update Received ---')
         print("Status: " + responseStatus)
-        self._state = {**self._state, **json.loads(payload)}
+        self._state = {**self._state["desired"], **json.loads(payload)}
         print(json.dumps(self._state["state"], indent=4, sort_keys=True))
         print('--- End of Update ---')
         reported = '{"state":{"reported":' + json.dumps(self._state["state"]["desired"]) + '}}'
