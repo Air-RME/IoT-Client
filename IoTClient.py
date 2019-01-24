@@ -62,7 +62,7 @@ class IoTClient:
     def _setStateCallback(self, payload, responseStatus, token):
         self._state = json.loads(payload)
         reported = '{"state":{"reported":' + json.dumps(self._state["state"]["desired"]) + '}}'
-        self._redis.rpush("order", self._state["state"]["desired"]);
+        self._redis.rpush("order", json.dumps(self._state["state"]["desired"]));
         print(self._redis.lpop("order").decode('utf-8'))
         self._shadowD.shadowUpdate(reported, None, 5)
 
