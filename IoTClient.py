@@ -74,6 +74,7 @@ class IoTClient:
         self._redis.rpush("order", self._state["state"]["desired"]);
         print(self._redis.lpop("order").decode('utf-8'))
         self._shadowD.shadowUpdate(reported, None, 5)
+        
 
     def publish(self, topic, message):
         self._mqttC.publish(topic, json.dumps(message), 0)
