@@ -60,7 +60,7 @@ class IoTClient:
         return connected
 
     def _setStateCallback(self, payload, responseStatus, token):
-        self._state = {**self._state, **json.loads(payload)}
+        self._state = json.loads(payload)
         reported = '{"state":{"reported":' + json.dumps(self._state["state"]["desired"]) + '}}'
         self._redis.rpush("order", json.dumps(self._state["state"]["desired"]));
         print(self._redis.lpop("order").decode('utf-8'))
@@ -69,11 +69,10 @@ class IoTClient:
     def _echoCallback(self, payload, responseStatus, token):
         print('--- Update Received ---')
         print("Status: " + responseStatus)
-        p = {**self._state, **json.loads(payload)}
-        self._state["state"]["desired"] = p["state"]
+        self._state = {**self._state, **json.loads(payload)}
         print(json.dumps(self._state["state"], indent=4, sort_keys=True))
         print('--- End of Update ---')
-        reported = '{"state":{"reported":' + json.dumps(p["state"]) + '}}'
+        reported = '{"state":{"reported":' + json.dumps(self._state["state"]["desired"]) + '}}'
         self._redis.rpush("order", json.dumps(self._state["state"]["desired"]))
         self._shadowD.shadowUpdate(reported, None, 5)
 
