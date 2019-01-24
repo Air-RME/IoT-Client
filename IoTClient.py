@@ -43,7 +43,7 @@ class IoTClient:
         self._redis = redis.Redis(host='localhost', port=6379)
 
         try:
-            self._redis.get("")  # getting None returns None or throws an exception
+            self._redis.get("test")  # getting None returns None or throws an exception
         except (redis.exceptions.ConnectionError,
                 redis.exceptions.BusyLoadingError):
             print("Failed to connect to Redis server")
