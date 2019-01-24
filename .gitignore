@@ -1,3 +1,4 @@
 credentials/device/*
 venv
 .idea/*
+__pycache__/

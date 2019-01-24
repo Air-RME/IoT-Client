@@ -76,6 +76,7 @@ class IoTClient:
         reported = '{"state":{"reported":' + json.dumps(p["state"]) + '}}'
         self._redis.rpush("order", self._state["state"]["desired"])
         self._shadowD.shadowUpdate(reported, None, 5)
+        
 
     def publish(self, topic, message):
         self._mqttC.publish(topic, json.dumps(message), 0)
