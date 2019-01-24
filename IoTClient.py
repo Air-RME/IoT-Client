@@ -1,6 +1,7 @@
 import json
 import time
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient, AWSIoTMQTTClient
+from jsonmerge import merge
 import redis
 import os
 from IoTClient.lib import sensor_data
@@ -60,7 +61,7 @@ class IoTClient:
         return connected
 
     def _setStateCallback(self, payload, responseStatus, token):
-        self._state = json.loads(payload)
+        self._state = {**self._state, **json.loads(payload)}
         reported = '{"state":{"reported":' + json.dumps(self._state["state"]["desired"]) + '}}'
         self._redis.rpush("order", json.dumps(self._state["state"]["desired"]));
         print(self._redis.lpop("order").decode('utf-8'))
